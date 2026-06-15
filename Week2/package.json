@@ -1,0 +1,11 @@
+{
+  "name": "icp-devops-mock-app",
+  "version": "1.0.0",
+  "description": "Mock application for InternCareerPath DevOps track",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo 'Backend API Running...' && node -e 'setInterval(() => {}, 1000)'",
+    "build": "mkdir -p dist && echo '<h1>Backend Connection Live - Build Complete!</h1>' > dist/index.html"
+  },
+  "dependencies": {}
+}
