@@ -1,0 +1,33 @@
+---
+# Week 5: Configuration Management - Production Microservice Deployment Playbook
+- name: Configure Production Application Host Environment
+  hosts: all
+  become: true
+  tasks:
+
+    # 1. Host Integrity & Verification
+    - name: Update Apt Package Cache and Verify Baseline Utilities
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    # 2. Automated Tool Deployment 
+    - name: Ensure Container Runtime Engine Components are Installed
+      apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+        state: present
+
+    # 3. Environment State Verification
+    - name: Ensure System Container Daemon Service is Active and Running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    # 4. Workload Provisioning
+    - name: Deploy Target 3-Tier Core Microservice Stack via Ansible Orchrastration
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/app/
+        state: present
